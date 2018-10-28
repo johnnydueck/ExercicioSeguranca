@@ -29,7 +29,8 @@ public class LoginSenha {
             Usuario usuario = Cadastro();
             String hashSenha = Hash(usuario.getSenha());
             String cadastro = (usuario.getNome()+ " " + hashSenha);
-            geraArquivo(cadastro);           
+            Leitor(".//arquivo.txt" , cadastro);           
+            
             
             
         }else if(opcaoMenu == 2){
@@ -55,9 +56,9 @@ public class LoginSenha {
        
     }
     
-    public static void leitor(String path) throws IOException {
+    public static void Leitor(String path, String arquivo) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
-        String linha = "";
+        String linha = arquivo;
         while (true) {
             if (linha != null) {
                 System.out.println(linha);
@@ -69,20 +70,14 @@ public class LoginSenha {
         buffRead.close();
     }
     
-    public static void escritor(String path) throws IOException {
+     public static void escritor(String path, String arquivo) throws IOException {
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
-        String linha = "";
-        Scanner in = new Scanner(System.in);
-        System.out.println("Escreva algo: ");
-        linha = in.nextLine();
-        buffWrite.append(linha + "\n");
+        
+        buffWrite.append(arquivo + "\n");
         buffWrite.close();
     }
- 
 
     
-    
-  
     public String Hash(String x)throws Exception{
         
         MessageDigest m=MessageDigest.getInstance("MD5");
